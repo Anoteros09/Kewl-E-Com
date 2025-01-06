@@ -12,8 +12,11 @@ function Navbar() {
           <Link href="/" className="mr-4">
             <li className="text-white mr-4">Home</li>
           </Link>
-          <Link href="/order" className="mr-4">
-            <li className="text-white mr-4">Order</li>
+          <Link href="/product" className="mr-4">
+            <li className="text-white mr-4">Product</li>
+          </Link>
+          <Link href="/cart" className="mr-4">
+            <li className="text-white mr-4">Cart</li>
           </Link>
           <Link href="/contact-us" className="mr-4">
             <li className="text-white mr-4">Contact Us</li>
