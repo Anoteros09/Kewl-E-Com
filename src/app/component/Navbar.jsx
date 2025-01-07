@@ -3,10 +3,10 @@ import React from "react";
 
 function Navbar() {
   return (
-    <nav className="bg-neutral1 h-16">
+    <nav className="bg-neutral1 h-16 sticky top-0 w-full z-10">
       <div className="container mx-auto flex justify-between items-center h-full">
-        <Link className="text-white text-2xl" href="/">
-          KEWL<span className="text-base">.com</span>
+        <Link className="text-white text-4xl font-serif" href="/">
+          KEWL<span className="text-xl">.com</span>
         </Link>
         <ul className="flex">
           <Link href="/" className="mr-4">
