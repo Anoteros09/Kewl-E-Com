@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Slider,
   TextField,
@@ -12,17 +12,25 @@ import {
   InputLabel,
   Box,
 } from "@mui/material";
+import useProductStore from "../product/store";
 
 function Filter() {
-  const [priceRange, setPriceRange] = useState([0, 100]);
-  const [rating, setRating] = useState(0);
-  const [brands, setBrands] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [discount, setDiscount] = useState([]);
+  const {
+    priceRange,
+    setPriceRange,
+    rating,
+    setRating,
+    brands,
+    setBrands,
+    categories,
+    setCategories,
+    discount,
+    setDiscount,
+  } = useProductStore((state) => state);
 
   const handleReset = () => {
-    setPriceRange([0, 100]);
-    setRating(0);
+    setPriceRange([1, 100]);
+    setRating(4.0);
     setBrands([]);
     setCategories([]);
     setDiscount([]);
@@ -37,7 +45,9 @@ function Filter() {
     <form onSubmit={handleSubmit}>
       <Box display="flex" flexDirection="column" gap={5} id="filter-form">
         <FormControl>
-          <InputLabel>Price Range</InputLabel>
+          <InputLabel>
+            Price: ₹{priceRange[0]} - ₹{priceRange[1]}
+          </InputLabel>
           <Slider
             value={priceRange}
             onChange={(e, newValue) => setPriceRange(newValue)}

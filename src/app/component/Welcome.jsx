@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Welcome() {
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -15,9 +17,12 @@ export default function Welcome() {
 
         {/* Call-to-action Buttons */}
         <div className="flex justify-center gap-4">
-          <button className="px-6 py-3 bg-[#00D1FF] text-black font-semibold rounded-md hover:bg-[#00A8CC] transition">
+          <Link
+            href="/product"
+            className="px-6 py-3 bg-[#00D1FF] text-black font-semibold rounded-md hover:bg-[#00A8CC] transition"
+          >
             Shop Now
-          </button>
+          </Link>
           <button className="px-6 py-3 bg-[#FF6B35] text-white font-semibold rounded-md hover:bg-[#E65A29] transition">
             Learn More
           </button>
