@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import useProductStore from "./store";
-import ProductCard from "../component/productCard";
+import ProductCard from "../component/ProductCard";
 
 function page() {
   const setProducts = useProductStore((state) => state.setProducts);
