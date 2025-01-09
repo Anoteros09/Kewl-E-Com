@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Welcome() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="flex items-center justify-center h-[80vh]">
       {/* Container */}
       <div className="max-w-3xl text-center space-y-6">
         {/* Title */}

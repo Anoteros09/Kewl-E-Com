@@ -4,7 +4,7 @@ function ProductCard({ product }) {
   return (
     <div
       key={product.id}
-      className="flex flex-col items-start p-4 rounded-lg bg-neutral1 "
+      className="flex flex-col items-start p-4 rounded-lg bg-neutral2"
     >
       <div className="flex justify-center">
         <img
