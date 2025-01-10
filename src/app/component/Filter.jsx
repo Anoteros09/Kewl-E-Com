@@ -26,6 +26,7 @@ function Filter() {
     setCategories,
     discount,
     setDiscount,
+    setFilter,
   } = useProductStore((state) => state);
 
   const handleReset = () => {
@@ -38,7 +39,7 @@ function Filter() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
+    setFilter(true);
   };
 
   return (

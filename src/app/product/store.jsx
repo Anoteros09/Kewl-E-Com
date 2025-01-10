@@ -8,6 +8,7 @@ const initialState = {
   brands: [],
   categories: [],
   discount: [],
+  filter: false,
 };
 
 const useProductStore = create(
@@ -20,6 +21,7 @@ const useProductStore = create(
       setBrands: (brands) => set({ brands }),
       setCategories: (categories) => set({ categories }),
       setDiscount: (discount) => set({ discount }),
+      setFilter: (filter) => set({ filter }),
       reset: () => set({ ...initialState }),
     }),
     { store: "Products" }
