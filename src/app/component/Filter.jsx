@@ -11,34 +11,41 @@ import {
   FormControl,
   InputLabel,
   Box,
+  Autocomplete,
+  Chip,
 } from "@mui/material";
 import useProductStore from "../product/store";
 
 function Filter() {
   const {
     priceRange,
-    setPriceRange,
+    selPriceRange,
+    setSelPriceRange,
     rating,
     setRating,
     brands,
-    setBrands,
+    selBrands,
+    setSelBrands,
     categories,
-    setCategories,
+    selCategories,
+    setSelCategories,
     discount,
     setDiscount,
+    setFilter,
   } = useProductStore((state) => state);
 
+  const brandOptions = brands.map((brand) => ({ label: brand }));
   const handleReset = () => {
-    setPriceRange([1, 100]);
+    setSelPriceRange(priceRange);
     setRating(4.0);
-    setBrands([]);
-    setCategories([]);
+    setSelBrands([]);
+    setSelCategories([]);
     setDiscount([]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
+    setFilter(true);
   };
 
   return (
@@ -46,14 +53,14 @@ function Filter() {
       <Box display="flex" flexDirection="column" gap={5} id="filter-form">
         <FormControl>
           <InputLabel>
-            Price: ₹{priceRange[0]} - ₹{priceRange[1]}
+            Price: ${selPriceRange[0]} - ${selPriceRange[1]}
           </InputLabel>
           <Slider
-            value={priceRange}
-            onChange={(e, newValue) => setPriceRange(newValue)}
+            value={selPriceRange}
+            onChange={(e, newValue) => setSelPriceRange(newValue)}
             valueLabelDisplay="auto"
-            min={0}
-            max={100}
+            min={priceRange[0]}
+            max={priceRange[1]}
           />
         </FormControl>
         <TextField
@@ -69,12 +76,22 @@ function Filter() {
             label="Brands"
             labelId="brand-select-label"
             multiple
-            value={brands}
-            onChange={(e) => setBrands(e.target.value)}
+            value={selBrands}
+            // sx={{ height: "56px" }}
+            onChange={(e) => setSelBrands(e.target.value)}
+            // renderValue={(selected) => (
+            //   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+            //     {selected.map((value) => (
+            //       <Chip key={value} label={value} />
+            //     ))}
+            //   </Box>
+            // )}
           >
-            <MenuItem value="brand1">Brand 1</MenuItem>
-            <MenuItem value="brand2">Brand 2</MenuItem>
-            <MenuItem value="brand3">Brand 3</MenuItem>
+            {brands.map((brand) => (
+              <MenuItem value={brand} key={brand}>
+                {brand}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <FormControl>
@@ -83,12 +100,14 @@ function Filter() {
             label="Categories"
             labelId="categories-select-label"
             multiple
-            value={categories}
-            onChange={(e) => setCategories(e.target.value)}
+            value={selCategories}
+            onChange={(e) => setSelCategories(e.target.value)}
           >
-            <MenuItem value="category1">Category 1</MenuItem>
-            <MenuItem value="category2">Category 2</MenuItem>
-            <MenuItem value="category3">Category 3</MenuItem>
+            {categories.map((brand) => (
+              <MenuItem value={brand} key={brand}>
+                {brand}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <FormControl component="fieldset">
@@ -96,15 +115,9 @@ function Filter() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={discount.includes("10")}
-                onChange={(e) =>
-                  setDiscount(
-                    e.target.checked
-                      ? [...discount, "10"]
-                      : discount.filter((d) => d !== "10")
-                  )
-                }
-                value="10"
+                checked={discount == 10}
+                onChange={(e) => setDiscount(e.target.checked ? 10 : 0.0)}
+                value={10}
               />
             }
             label="10% or more"
@@ -112,15 +125,9 @@ function Filter() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={discount.includes("20")}
-                onChange={(e) =>
-                  setDiscount(
-                    e.target.checked
-                      ? [...discount, "20"]
-                      : discount.filter((d) => d !== "20")
-                  )
-                }
-                value="20"
+                checked={discount == 20}
+                onChange={(e) => setDiscount(e.target.checked ? 20 : 0.0)}
+                value={20}
               />
             }
             label="20% or more"
@@ -128,15 +135,9 @@ function Filter() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={discount.includes("50")}
-                onChange={(e) =>
-                  setDiscount(
-                    e.target.checked
-                      ? [...discount, "50"]
-                      : discount.filter((d) => d !== "50")
-                  )
-                }
-                value="50"
+                checked={discount == 50}
+                onChange={(e) => setDiscount(e.target.checked ? 50 : 0.0)}
+                value={50}
               />
             }
             label="50% or more"
