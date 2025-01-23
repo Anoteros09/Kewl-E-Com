@@ -33,3 +33,7 @@ body {
 #filter-form fieldset {
   border-color: white;
 }
+
+.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  background-color: var(--neutral1);
+}
