@@ -49,13 +49,7 @@ function Filter() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box
-        display="flex"
-        flexDirection="column"
-        gap={5}
-        id="filter-form"
-        className="md:display:"
-      >
+      <Box display="flex" flexDirection="column" gap={5} id="filter-form">
         <FormControl>
           <InputLabel sx={{ marginTop: "1rem" }}>
             Price: ${selPriceRange[0]} - ${selPriceRange[1]}
