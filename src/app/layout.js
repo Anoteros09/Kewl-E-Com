@@ -42,6 +42,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <title>Kewl.com</title>
+        <link rel="icon" type="image/x-icon" href="./favicon.ico" sizes="any" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen relative`}

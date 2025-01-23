@@ -49,7 +49,13 @@ function Filter() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box display="flex" flexDirection="column" gap={5} id="filter-form">
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap={5}
+        id="filter-form"
+        className="md:display:"
+      >
         <FormControl>
           <InputLabel sx={{ marginTop: "1rem" }}>
             Price: ${selPriceRange[0]} - ${selPriceRange[1]}
@@ -79,7 +85,7 @@ function Filter() {
             onChange={(e) => setSelBrands(e.target.value)}
           >
             {brands.map((brand) => (
-              <MenuItem value={brand} key={brand}>
+              <MenuItem value={brand} key={brand} sx={{ color: "white" }}>
                 {brand}
               </MenuItem>
             ))}
@@ -95,7 +101,7 @@ function Filter() {
             onChange={(e) => setSelCategories(e.target.value)}
           >
             {categories.map((brand) => (
-              <MenuItem value={brand} key={brand}>
+              <MenuItem value={brand} key={brand} sx={{ color: "white" }}>
                 {brand}
               </MenuItem>
             ))}
