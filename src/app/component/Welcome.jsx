@@ -18,7 +18,7 @@ export default function Welcome() {
         {/* Call-to-action Buttons */}
         <div className="flex justify-center gap-4">
           <Link
-            href="/product"
+            href="/products"
             className="px-6 py-3 bg-[#00D1FF] text-black font-semibold rounded-md hover:bg-[#00A8CC] transition"
           >
             Shop Now
