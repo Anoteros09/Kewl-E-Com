@@ -79,7 +79,7 @@ function Filter() {
             onChange={(e) => setSelBrands(e.target.value)}
           >
             {brands.map((brand) => (
-              <MenuItem value={brand} key={brand}>
+              <MenuItem value={brand} key={brand} sx={{ color: "white" }}>
                 {brand}
               </MenuItem>
             ))}
@@ -95,7 +95,7 @@ function Filter() {
             onChange={(e) => setSelCategories(e.target.value)}
           >
             {categories.map((brand) => (
-              <MenuItem value={brand} key={brand}>
+              <MenuItem value={brand} key={brand} sx={{ color: "white" }}>
                 {brand}
               </MenuItem>
             ))}

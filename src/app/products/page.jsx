@@ -51,7 +51,7 @@ function page() {
   return isLoading ? (
     <LinearProgress color="secondary" />
   ) : (
-    <div className="grid grid-cols-1 gap-4 p-6">
+    <div className="grid md:grid-cols-3 grid-cols-1 gap-4 p-6">
       {filteredList.map((product) => {
         return <ProductCard product={product} key={product.id} />;
       })}

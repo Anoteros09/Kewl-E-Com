@@ -80,6 +80,24 @@ This project is a modern e-commerce website built using **Next.js** and **Tailwi
 - **Secondary 1:** Fiery Orange (#FF6B35)
 - **Secondary 2:** Soft Purple (#9C88FF)
 
+## Roadmap
+
+- [x] _Create a base web application with custom dark theme style_
+- [x] _Create a responsive navbar_
+- [x] _Create basic routes_
+  - Products list
+  - Cart
+  - Orders
+  - Profile
+- [x] _Implement Zustand state management_
+- [x] _Create filter component_ for filtering based on various aspects
+- [x] _Responsive grid_ according to the screen size
+- [ ] _Search functionality_ to search based on keywords/tags
+- [ ] _Add to cart functionality_ & cart page to view items added in cart
+- [ ] _Orders page_ to view ordered items based on selected timeline
+- [ ] _Setup database_ to store user order data
+- [ ] _Add authentication using Clerk_
+
 ## Contributing
 
 Contributions are welcome! If you have ideas for improvements or encounter issues, please feel free to create a pull request or submit an issue.

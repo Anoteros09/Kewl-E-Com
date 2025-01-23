@@ -2,15 +2,12 @@ import React from "react";
 
 function ProductCard({ product }) {
   return (
-    <div
-      key={product.id}
-      className="flex flex-col items-start p-4 rounded-lg bg-neutral2"
-    >
-      <div className="flex justify-center">
+    <div key={product.id} className="flex p-4 rounded-lg bg-neutral2">
+      <div className="flex justify-center md:flex-row flex-col">
         <img
           src={product.thumbnail}
           alt={product.title}
-          className="w-48 h-48 object-fit bg-transparent rounded-lg"
+          className="w-48 h-48 bg-transparent rounded-lg"
         />
 
         <div className="flex flex-col items-start justify-between ml-4">

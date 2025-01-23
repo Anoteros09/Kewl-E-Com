@@ -13,6 +13,7 @@ const initialState = {
   discount: 0.0,
   filter: false,
   isLoading: true,
+  searchKeyword: "",
 };
 
 const useProductStore = create(
@@ -54,6 +55,7 @@ const useProductStore = create(
       setDiscount: (discount) => set({ discount }),
       setFilter: (filter) => set({ filter }),
       setIsLoading: (isLoading) => set({ isLoading }),
+      setSearchKeyword: (searchKeyword) => set({ searchKeyword }),
       reset: () => set({ ...initialState }),
     }),
     { store: "Products" }
