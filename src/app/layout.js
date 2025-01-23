@@ -1,7 +1,21 @@
+"use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./component/Navbar";
-
+import { createTheme, ThemeProvider } from "@mui/material";
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#007bff",
+    },
+    secondary: {
+      main: "#ff6b35",
+    },
+    neutral: {
+      main: "#222222",
+    },
+  },
+});
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -11,10 +25,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const metadata = {
-  title: "Kewl.com",
-};
 
 function Footer() {
   return (
@@ -30,12 +40,17 @@ function Footer() {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <title>Kewl.com</title>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen relative`}
       >
-        <Navbar />
-        <main className="pb-16">{children}</main>
-        <Footer />
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <main className="pb-16">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

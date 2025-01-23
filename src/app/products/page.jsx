@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import useProductStore from "./store";
 import ProductCard from "../component/ProductCard";
 import { FilterProducts } from "../utils/FilterProducts";
+import { LinearProgress } from "@mui/material";
 
 function page() {
   const {
@@ -15,16 +16,20 @@ function page() {
     products,
     filter,
     setFilter,
+    isLoading,
+    setIsLoading,
   } = useProductStore((state) => state);
   const [filteredList, setFilteredList] = useState([]);
-  const fetchProducts = async () => {
-    const { products: productsData } = await fetch(
-      "https://dummyjson.com/products?limit=0"
-    ).then((res) => res.json());
-    setProducts(productsData);
-    setFilteredList(productsData);
-  };
+
   useEffect(() => {
+    const fetchProducts = async () => {
+      const { products: productsData } = await fetch(
+        "https://dummyjson.com/products?limit=0"
+      ).then((res) => res.json());
+      setProducts(productsData);
+      setFilteredList(productsData);
+      setIsLoading(false);
+    };
     fetchProducts();
   }, []);
 
@@ -40,9 +45,12 @@ function page() {
         })
       );
       setFilter(false);
+      setIsLoading(false);
     }
   }, [filter]);
-  return (
+  return isLoading ? (
+    <LinearProgress color="secondary" />
+  ) : (
     <div className="grid grid-cols-1 gap-4 p-6">
       {filteredList.map((product) => {
         return <ProductCard product={product} key={product.id} />;

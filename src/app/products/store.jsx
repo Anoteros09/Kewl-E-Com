@@ -12,6 +12,7 @@ const initialState = {
   selCategories: [],
   discount: 0.0,
   filter: false,
+  isLoading: true,
 };
 
 const useProductStore = create(
@@ -52,6 +53,7 @@ const useProductStore = create(
       setSelCategories: (selCategories) => set({ selCategories }),
       setDiscount: (discount) => set({ discount }),
       setFilter: (filter) => set({ filter }),
+      setIsLoading: (isLoading) => set({ isLoading }),
       reset: () => set({ ...initialState }),
     }),
     { store: "Products" }

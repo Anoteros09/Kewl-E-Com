@@ -11,10 +11,8 @@ import {
   FormControl,
   InputLabel,
   Box,
-  Autocomplete,
-  Chip,
 } from "@mui/material";
-import useProductStore from "../product/store";
+import useProductStore from "../products/store";
 
 function Filter() {
   const {
@@ -32,9 +30,9 @@ function Filter() {
     discount,
     setDiscount,
     setFilter,
+    setIsLoading,
   } = useProductStore((state) => state);
 
-  const brandOptions = brands.map((brand) => ({ label: brand }));
   const handleReset = () => {
     setSelPriceRange(priceRange);
     setRating(4.0);
@@ -46,13 +44,14 @@ function Filter() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFilter(true);
+    setIsLoading(true);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <Box display="flex" flexDirection="column" gap={5} id="filter-form">
         <FormControl>
-          <InputLabel>
+          <InputLabel sx={{ marginTop: "1rem" }}>
             Price: ${selPriceRange[0]} - ${selPriceRange[1]}
           </InputLabel>
           <Slider
@@ -66,7 +65,7 @@ function Filter() {
         <TextField
           label="Rating"
           type="number"
-          inputProps={{ min: 0, max: 5, step: 0.1 }}
+          inputProps={{ min: 0, max: 5, step: 0.01 }}
           value={rating}
           onChange={(e) => setRating(Number(e.target.value))}
         />
@@ -77,15 +76,7 @@ function Filter() {
             labelId="brand-select-label"
             multiple
             value={selBrands}
-            // sx={{ height: "56px" }}
             onChange={(e) => setSelBrands(e.target.value)}
-            // renderValue={(selected) => (
-            //   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-            //     {selected.map((value) => (
-            //       <Chip key={value} label={value} />
-            //     ))}
-            //   </Box>
-            // )}
           >
             {brands.map((brand) => (
               <MenuItem value={brand} key={brand}>
