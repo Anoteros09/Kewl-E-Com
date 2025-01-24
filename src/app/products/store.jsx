@@ -5,7 +5,7 @@ const initialState = {
   products: [],
   priceRange: [0, 1],
   selPriceRange: [0, 1],
-  rating: 4.5,
+  rating: 1.0,
   brands: [],
   selBrands: [],
   categories: [],

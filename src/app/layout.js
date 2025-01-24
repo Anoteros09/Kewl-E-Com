@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./component/Navbar";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 const theme = createTheme({
   palette: {
     primary: {
@@ -39,20 +41,31 @@ function Footer() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Kewl.com</title>
-        <link rel="icon" type="image/x-icon" href="./favicon.ico" sizes="any" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen relative`}
-      >
-        <ThemeProvider theme={theme}>
-          <Navbar />
-          <main className="pb-16">{children}</main>
-          <Footer />
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
+      <html lang="en">
+        <head>
+          <title>Kewl.com</title>
+          <link
+            rel="icon"
+            type="image/x-icon"
+            href="./favicon.ico"
+            sizes="any"
+          />
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen relative`}
+        >
+          <ThemeProvider theme={theme}>
+            <Navbar />
+            <main className="pb-16">{children}</main>
+            <Footer />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
