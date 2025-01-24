@@ -18,6 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 import useProductStore from "../products/store";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const pages = ["Home", "Products", "Cart", "Orders", "Profile"];
 const pageLinks = {
@@ -27,7 +28,6 @@ const pageLinks = {
   Orders: "/orders",
   Profile: "/profile",
 };
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -223,35 +223,12 @@ function Navbar() {
             {searchKeyword}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: "center", color: "white" }}>
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            <SignedOut>
+              <SignInButton className="bg-primary2 p-1 rounded-lg text-black font-semibold" />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </Box>
         </Toolbar>
       </Container>

@@ -1,6 +1,6 @@
 export function FilterProducts(products, filters) {
   console.log(filters);
-  console.log(products.length);
+  console.log(products);
   const filterKeys = Object.keys(filters);
   let filteredProducts = products;
   for (let i = 0; i < filterKeys.length; i++) {
@@ -26,6 +26,22 @@ export function FilterProducts(products, filters) {
         filteredProducts = filteredProducts.filter(
           (product) => product.discountPercentage >= filters[filterKeys[i]]
         );
+        break;
+      case "selBrands":
+        console.log("filtering by brands " + filters[filterKeys[i]]);
+        if (filters[filterKeys[i]].length > 0) {
+          filteredProducts = filteredProducts.filter((product) =>
+            filters[filterKeys[i]].includes(product.brand)
+          );
+        }
+        break;
+      case "selCategories":
+        console.log("filtering by categories " + filters[filterKeys[i]]);
+        if (filters[filterKeys[i]].length > 0) {
+          filteredProducts = filteredProducts.filter((product) =>
+            filters[filterKeys[i]].includes(product.category)
+          );
+        }
         break;
       default:
         break;

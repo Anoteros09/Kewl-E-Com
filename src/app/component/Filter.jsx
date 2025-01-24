@@ -35,7 +35,7 @@ function Filter() {
 
   const handleReset = () => {
     setSelPriceRange(priceRange);
-    setRating(4.0);
+    setRating(1.0);
     setSelBrands([]);
     setSelCategories([]);
     setDiscount([]);
