@@ -4,6 +4,7 @@ import useProductStore from "./store";
 import ProductCard from "../component/ProductCard";
 import { FilterProducts } from "../utils/FilterProducts";
 import { LinearProgress } from "@mui/material";
+import AddToCart from "../component/AddToCart";
 
 function page() {
   const {
@@ -20,7 +21,13 @@ function page() {
     setIsLoading,
   } = useProductStore((state) => state);
   const [filteredList, setFilteredList] = useState([]);
-
+  const [open, setOpen] = useState(false);
+  const [modalProduct, setModalProduct] = useState({});
+  const handleAddToCart = (product) => {
+    console.log("Triggered handleAddToCart");
+    setOpen(true);
+    setModalProduct(product);
+  };
   useEffect(() => {
     const fetchProducts = async () => {
       const { products: productsData } = await fetch(
@@ -51,11 +58,20 @@ function page() {
   return isLoading ? (
     <LinearProgress color="secondary" />
   ) : (
-    <div className="grid md:grid-cols-3 grid-cols-1 gap-4 p-6">
-      {filteredList.map((product) => {
-        return <ProductCard product={product} key={product.id} />;
-      })}
-    </div>
+    <>
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-4 p-6">
+        {filteredList.map((product) => {
+          return (
+            <ProductCard
+              product={product}
+              key={product.id}
+              handleAddToCart={handleAddToCart}
+            />
+          );
+        })}
+      </div>
+      <AddToCart open={open} setOpen={setOpen} modalProduct={modalProduct} />
+    </>
   );
 }
 
