@@ -16,6 +16,10 @@ const theme = createTheme({
     neutral: {
       main: "#222222",
     },
+    neutral2: {
+      main: "#333333",
+    },
+    mode: "dark",
   },
 });
 const geistSans = Geist({
