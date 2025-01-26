@@ -95,7 +95,7 @@ This project is a modern e-commerce website built using **Next.js** and **Tailwi
 - [ ] _Search functionality_ to search based on keywords/tags
 - [ ] _Add to cart functionality_ & cart page to view items added in cart
 - [ ] _Orders page_ to view ordered items based on selected timeline
-- [ ] _Setup database_ to store user order data
+- [x] _Setup database_ to store user order data
 - [ ] _Add authentication using Clerk_
 
 ## Contributing

@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProductCard({ product, handleAddToCart }) {
+function ProductCard({ product, handleAddToCartPopup }) {
   return (
     <div key={product.id} className="flex p-4 rounded-lg bg-neutral2">
       <div className="flex justify-center md:flex-row flex-col">
@@ -27,7 +27,7 @@ function ProductCard({ product, handleAddToCart }) {
           </div>
           <button
             className="px-4 py-2 bg-secondary1 text-white font-semibold rounded-md mt-4 hover:bg-[#005F9F] transition"
-            onClick={() => handleAddToCart(product)}
+            onClick={() => handleAddToCartPopup(product)}
           >
             Add to Cart
           </button>

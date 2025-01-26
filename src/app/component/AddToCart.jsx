@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from "react";
 import QuantityInput from "./NumberInput";
 
-function AddToCart({ modalProduct, open, setOpen }) {
+function AddToCart({ modalProduct, open, setOpen, handleAddToCart }) {
   const [quantity, setQuantity] = useState(1);
   const handleClose = () => setOpen(false);
   useEffect(() => {
@@ -43,7 +43,10 @@ function AddToCart({ modalProduct, open, setOpen }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose} autoFocus>
+        <Button
+          onClick={() => handleAddToCart(modalProduct, quantity)}
+          autoFocus
+        >
           Add to cart
         </Button>
       </DialogActions>
