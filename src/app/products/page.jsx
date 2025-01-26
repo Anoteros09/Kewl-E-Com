@@ -23,11 +23,17 @@ function page() {
   const [filteredList, setFilteredList] = useState([]);
   const [open, setOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState({});
-  const handleAddToCart = (product) => {
-    console.log("Triggered handleAddToCart");
+  const handleAddToCartPopup = (product) => {
+    console.log("Triggered handleAddToCartPopup");
     setOpen(true);
     setModalProduct(product);
   };
+
+  const handleAddToCart = (product, quantity) => {
+    console.log(`Added ${quantity} ${product.title} to cart`);
+    setOpen(false);
+  };
+
   useEffect(() => {
     const fetchProducts = async () => {
       const { products: productsData } = await fetch(
@@ -65,12 +71,17 @@ function page() {
             <ProductCard
               product={product}
               key={product.id}
-              handleAddToCart={handleAddToCart}
+              handleAddToCartPopup={handleAddToCartPopup}
             />
           );
         })}
       </div>
-      <AddToCart open={open} setOpen={setOpen} modalProduct={modalProduct} />
+      <AddToCart
+        open={open}
+        setOpen={setOpen}
+        modalProduct={modalProduct}
+        handleAddToCart={handleAddToCart}
+      />
     </>
   );
 }
