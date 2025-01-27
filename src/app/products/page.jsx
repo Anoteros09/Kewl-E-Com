@@ -39,7 +39,7 @@ function page() {
       const url = joinPaths(path, "cart/update_cart");
       const token = encryptData({
         userId: user.id,
-        productId: "product.id",
+        productId: product.id,
         quantity,
         netPrice: product.price * quantity,
         unitPrice: product.price,
