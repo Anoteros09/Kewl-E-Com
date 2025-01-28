@@ -43,7 +43,34 @@ This project is a modern e-commerce website built using **Next.js** and **Tailwi
    yarn install
    ```
 
-4. Start the development server:
+4. Setting Up the `.env.local` File
+
+   To configure environment variables for the application, create a `.env.local` file in the root of your project. 
+   This file is used to store sensitive or environment-specific variables and should not be committed to version control (ensure `.env.local` is listed in your `.gitignore`).
+   
+   #### Steps
+   
+   i. Create a new file named `.env.local` in the root directory of your project:
+      ```bash
+      touch .env.local
+      ```
+   
+   ii. Add the required environment variables to the file. Here's an example:
+      ```env
+      NEXT_PUBLIC_JWT_KEY=your-hash-string
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key
+      CLERK_SECRET_KEY=your-clerk-secret-key
+      DATABASE_URL=your-db-details
+      .
+      .
+      ```
+   
+   ##### Notes
+   - Prefix environment variables with `NEXT_PUBLIC_` if they need to be exposed to the browser.
+   - *IF USING `NEXT_PUBLIC_[Var]` please use server action to avoid exposing environment variable to browser*
+   - Avoid sharing sensitive information in publicly accessible variables.
+
+5. Start the development server:
 
    ```bash
    npm run dev
@@ -51,7 +78,7 @@ This project is a modern e-commerce website built using **Next.js** and **Tailwi
    yarn dev
    ```
 
-5. Open your browser and navigate to:
+6. Open your browser and navigate to:
    ```
    http://localhost:3000
    ```
@@ -92,11 +119,15 @@ This project is a modern e-commerce website built using **Next.js** and **Tailwi
 - [x] _Implement Zustand state management_
 - [x] _Create filter component_ for filtering based on various aspects
 - [x] _Responsive grid_ according to the screen size
+- [ ] _Product Page_ to view detailed info
+- [ ] _Pagination_ to load data efficiently
 - [ ] _Search functionality_ to search based on keywords/tags
-- [ ] _Add to cart functionality_ & cart page to view items added in cart
+- [x] _Add to cart functionality_
+- [ ] Add to cart for Non-signed in user
+- [ ] _Cart page_ to view items added in cart
 - [ ] _Orders page_ to view ordered items based on selected timeline
 - [x] _Setup database_ to store user order data
-- [ ] _Add authentication using Clerk_
+- [x] _Add authentication using Clerk_
 
 ## Contributing
 
