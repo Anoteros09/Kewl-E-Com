@@ -1,6 +1,6 @@
 import { InputBase } from "@mui/material";
 import React from "react";
-import useProductStore from "../products/store";
+import useProductStore from "../store/products";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 const Search = styled("div")(({ theme }) => ({

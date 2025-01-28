@@ -10,9 +10,11 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import QuantityInput from "./NumberInput";
+import useGlobalStore from "../store/global";
 
 function AddToCart({ modalProduct, open, setOpen, handleAddToCart }) {
   const [quantity, setQuantity] = useState(1);
+  const { setIsLoading } = useGlobalStore((state) => state);
   const handleClose = () => setOpen(false);
   useEffect(() => {
     setQuantity(1);
@@ -44,7 +46,11 @@ function AddToCart({ modalProduct, open, setOpen, handleAddToCart }) {
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button
-          onClick={() => handleAddToCart(modalProduct, quantity)}
+          onClick={() => {
+            handleAddToCart(modalProduct, quantity);
+            setOpen(false);
+            setIsLoading(true);
+          }}
           autoFocus
         >
           Add to cart

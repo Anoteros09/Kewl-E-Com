@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import useProductStore from "./store";
+import useProductStore from "../store/products";
 import ProductCard from "../component/ProductCard";
 import { FilterProducts } from "../utils/FilterProducts";
-import { LinearProgress } from "@mui/material";
 import AddToCart from "../component/AddToCart";
 import { useUser } from "@clerk/nextjs";
 import { getCurrentURL, joinPaths } from "../utils/commonFn";
 import { encryptData } from "../utils/encryptData";
+import useCartStore from "../store/cart";
+import useGlobalStore from "../store/global";
 
 function page() {
   const {
@@ -20,13 +21,14 @@ function page() {
     products,
     filter,
     setFilter,
-    isLoading,
-    setIsLoading,
   } = useProductStore((state) => state);
+  const { setIsLoading } = useGlobalStore((state) => state);
   const [filteredList, setFilteredList] = useState([]);
   const [open, setOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState({});
   const { user } = useUser();
+  const { fetchUserCart } = useCartStore((state) => state);
+
   const handleAddToCartPopup = (product) => {
     console.log("Triggered handleAddToCartPopup");
     setOpen(true);
@@ -36,7 +38,7 @@ function page() {
   const handleAddToCart = async (product, quantity) => {
     try {
       const path = getCurrentURL();
-      const url = joinPaths(path, "cart/update_cart");
+      const url = joinPaths(path, "api/cart/update_cart");
       const token = encryptData({
         userId: user.id,
         productId: product.id,
@@ -47,11 +49,16 @@ function page() {
       fetch(url, {
         method: "POST",
         body: JSON.stringify({ payload: token }),
-      }).catch((error) => console.info(error));
+      })
+        .catch((error) => console.info(error))
+        .finally(() => {
+          fetchUserCart(user.id);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     } catch (error) {
       console.error(error);
-    } finally {
-      setOpen(false);
     }
   };
 
@@ -82,9 +89,7 @@ function page() {
       setIsLoading(false);
     }
   }, [filter]);
-  return isLoading ? (
-    <LinearProgress color="secondary" />
-  ) : (
+  return (
     <>
       <div className="grid md:grid-cols-3 grid-cols-1 gap-4 p-6">
         {filteredList.map((product) => {

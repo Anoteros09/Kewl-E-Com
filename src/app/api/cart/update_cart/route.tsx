@@ -1,16 +1,12 @@
 import { neon } from "@neondatabase/serverless";
 import { type NextRequest } from "next/server";
-import CryptoJS from "crypto-js";
+import { decryptData } from "../../../utils/decryptData";
 
 export async function POST(req: NextRequest) {
   try {
     const { payload } = await req.json();
-    const bytes = CryptoJS.AES.decrypt(
-      payload,
-      process.env.NEXT_PUBLIC_JWT_KEY
-    );
-    const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-    const { productId, userId, quantity, netPrice, unitPrice } = decryptedData;
+    const { productId, userId, quantity, netPrice, unitPrice } =
+      decryptData(payload);
     const sql = neon(`${process.env.DATABASE_URL}`);
     const existingData = await sql(
       `SELECT * FROM user_cart WHERE user_id = '${userId}' AND product_id = ${productId}`
