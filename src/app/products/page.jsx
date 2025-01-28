@@ -39,7 +39,7 @@ function page() {
     try {
       const path = getCurrentURL();
       const url = joinPaths(path, "api/cart/update_cart");
-      const token = encryptData({
+      const token = await encryptData({
         userId: user.id,
         productId: product.id,
         quantity,

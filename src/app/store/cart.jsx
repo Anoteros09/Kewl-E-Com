@@ -16,7 +16,7 @@ const useCartStore = create(
       fetchUserCart: async (userId) => {
         const path = getCurrentURL();
         const url = joinPaths(path, "api/cart/get_cart");
-        const token = encryptData({ userId });
+        const token = await encryptData({ userId });
         const resp = await fetch(url, {
           method: "POST",
           body: JSON.stringify({ payload: token }),
