@@ -1,21 +1,33 @@
 "use client";
 import {
   AppBar,
+  Badge,
   Box,
-  Button,
   Container,
   IconButton,
+  LinearProgress,
   Menu,
   MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
+import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
+import useCartStore from "../store/cart";
+import Link from "next/link";
+import useGlobalStore from "../store/global";
+import { usePathname } from "next/navigation";
 
-const pages = ["Home", "Products", "Cart", "Orders", "Profile"];
+const pages = ["Home", "Products", "Orders", "Profile"];
 const pageLinks = {
   Home: "/",
   Products: "/products",
@@ -26,6 +38,17 @@ const pageLinks = {
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const { user, isSignedIn } = useUser();
+  const { fetchUserCart, total } = useCartStore((state) => state);
+  const { setIsLoading, isLoading } = useGlobalStore((state) => state);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      fetchUserCart(user.id);
+      setIsLoading(false);
+    }
+  }, [isSignedIn, user]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -114,6 +137,9 @@ function Navbar() {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography
                     href={pageLinks[page]}
+                    onClick={() =>
+                      setIsLoading(pathname != pageLinks[page] && true)
+                    }
                     component="a"
                     sx={{ textAlign: "center", color: "white" }}
                   >
@@ -144,27 +170,44 @@ function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
+              <Link
                 key={page}
-                onClick={handleCloseNavMenu}
                 href={pageLinks[page]}
-                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={() =>
+                  setIsLoading(pathname != pageLinks[page] && true)
+                }
+                className="my-2 text-white flex items-center mx-5"
+                sx={{ my: 2, color: "white", display: "block", mr: 5 }}
               >
                 {page}
-              </Button>
+              </Link>
             ))}
             <SearchBar />
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box
+            sx={{
+              flexGrow: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "6rem",
+            }}
+          >
             <SignedOut>
               <SignInButton className="bg-primary2 p-1 rounded-lg text-black font-semibold" />
             </SignedOut>
             <SignedIn>
+              <Link href="/cart">
+                <Badge badgeContent={total} color="primary">
+                  <ShoppingCartTwoToneIcon />
+                </Badge>
+              </Link>
               <UserButton />
             </SignedIn>
           </Box>
         </Toolbar>
       </Container>
+      {isLoading && <LinearProgress color="secondary" />}
     </AppBar>
   );
 }

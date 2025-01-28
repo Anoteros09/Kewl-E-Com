@@ -12,7 +12,6 @@ const initialState = {
   selCategories: [],
   discount: 0.0,
   filter: false,
-  isLoading: true,
   searchKeyword: "",
 };
 
@@ -54,11 +53,10 @@ const useProductStore = create(
       setSelCategories: (selCategories) => set({ selCategories }),
       setDiscount: (discount) => set({ discount }),
       setFilter: (filter) => set({ filter }),
-      setIsLoading: (isLoading) => set({ isLoading }),
       setSearchKeyword: (searchKeyword) => set({ searchKeyword }),
       reset: () => set({ ...initialState }),
     }),
-    { store: "Products" }
+    { name: "Products" }
   )
 );
 

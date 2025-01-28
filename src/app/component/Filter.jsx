@@ -12,7 +12,8 @@ import {
   InputLabel,
   Box,
 } from "@mui/material";
-import useProductStore from "../products/store";
+import useProductStore from "../store/products";
+import useGlobalStore from "../store/global";
 
 function Filter() {
   const {
@@ -30,8 +31,8 @@ function Filter() {
     discount,
     setDiscount,
     setFilter,
-    setIsLoading,
   } = useProductStore((state) => state);
+  const { setIsLoading } = useGlobalStore((state) => state);
 
   const handleReset = () => {
     setSelPriceRange(priceRange);

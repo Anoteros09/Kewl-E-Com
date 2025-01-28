@@ -1,6 +1,13 @@
+"use client";
 import Link from "next/link";
+import useGlobalStore from "../store/global";
+import { useEffect } from "react";
 
 export default function Welcome() {
+  const { setIsLoading } = useGlobalStore((state) => state);
+  useEffect(() => {
+    setIsLoading(false);
+  }, [setIsLoading]);
   return (
     <div className="flex items-center justify-center h-[80vh]">
       {/* Container */}
