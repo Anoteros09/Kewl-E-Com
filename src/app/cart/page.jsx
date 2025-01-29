@@ -1,5 +1,5 @@
 "use client";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import React, { useEffect } from "react";
 import useCartStore from "../store/cart";
 import useProductStore from "../store/products";
@@ -23,9 +23,9 @@ function page() {
   }, [products]);
   return (
     <Container>
-      <Typography className="text-2xl font-bold mb-6 mt-4 text-gray-400 border-b-2 border-gray-500 pb-2">
+      <p className="text-2xl font-bold mb-6 mt-4 text-gray-400 border-b-2 border-gray-500 pb-2">
         Cart Summary
-      </Typography>
+      </p>
       <Box>
         {cart
           .sort((a, b) => a.product_id - b.product_id)

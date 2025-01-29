@@ -17,7 +17,7 @@ const theme = createTheme({
       main: "#1e90ff",
     },
     primary2: {
-      main: alpha("#64b5f6", 0.7),
+      main: "#64b5f6",
       light: alpha("#64b5f6", 0.5),
       dark: alpha("#64b5f6", 0.9),
       contrastText:
@@ -27,21 +27,21 @@ const theme = createTheme({
       main: "#e53935",
     },
     secondary2: {
-      main: alpha("#ffa726", 0.7),
+      main: "#ffa726",
       light: alpha("#ffa726", 0.5),
       dark: alpha("#ffa726", 0.9),
       contrastText:
         getContrastRatio(alpha("#ffa726", 0.7), "#fff") > 4.5 ? "#fff" : "#111",
     },
     neutral: {
-      main: alpha("#0e0e0e", 0.7),
+      main: "#0e0e0e",
       light: alpha("#0e0e0e", 0.5),
       dark: alpha("#0e0e0e", 0.9),
       contrastText:
         getContrastRatio(alpha("#0e0e0e", 0.7), "#fff") > 4.5 ? "#fff" : "#111",
     },
     neutral2: {
-      main: alpha("#222222", 0.7),
+      main: "#222222",
       light: alpha("#222222", 0.5),
       dark: alpha("#222222", 0.9),
       contrastText:
