@@ -26,7 +26,7 @@ function ProductCard({ product, handleAddToCartPopup }) {
             </p>
           </div>
           <button
-            className="px-4 py-2 bg-secondary1 text-white font-semibold rounded-md mt-4 hover:bg-[#005F9F] transition"
+            className="px-4 py-2 bg-primary1 text-white font-semibold rounded-md mt-4 hover:bg-[#005F9F] transition"
             onClick={() => handleAddToCartPopup(product)}
           >
             Add to Cart

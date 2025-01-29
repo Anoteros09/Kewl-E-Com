@@ -3,6 +3,7 @@ import { devtools } from "zustand/middleware";
 
 const initialState = {
   products: [],
+  productsById: [],
   priceRange: [0, 1],
   selPriceRange: [0, 1],
   rating: 1.0,
@@ -45,6 +46,41 @@ const useProductStore = create(
           products,
           ...filterDefaults,
           selPriceRange: filterDefaults.priceRange,
+        });
+      },
+      fetchProducts: async () => {
+        const { products } = await fetch(
+          "https://dummyjson.com/products?limit=0"
+        ).then((res) => res.json());
+        let filterDefaults = {
+          priceRange: [0, 1],
+          brands: [],
+          categories: [],
+        };
+        products.forEach((product) => {
+          filterDefaults.brands.includes(product.brand) ||
+          typeof product.brand != "string"
+            ? null
+            : filterDefaults.brands.push(product.brand);
+
+          filterDefaults.categories.includes(product.category) ||
+          typeof product.category != "string"
+            ? null
+            : filterDefaults.categories.push(product.category);
+          product.price > filterDefaults.priceRange[1]
+            ? (filterDefaults.priceRange[1] = product.price)
+            : product.price < filterDefaults.priceRange[0]
+            ? (filterDefaults.priceRange[0] = product.price)
+            : null;
+        });
+        set({
+          products,
+          ...filterDefaults,
+          selPriceRange: filterDefaults.priceRange,
+          productsById: products.reduce((acc, product) => {
+            acc[product.id] = product;
+            return acc;
+          }, {}),
         });
       },
       setSelPriceRange: (selPriceRange) => set({ selPriceRange }),

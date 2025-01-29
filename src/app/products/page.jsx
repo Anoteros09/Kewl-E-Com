@@ -17,7 +17,7 @@ function page() {
     selBrands,
     selCategories,
     rating,
-    setProducts,
+    fetchProducts,
     products,
     filter,
     setFilter,
@@ -63,16 +63,17 @@ function page() {
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const { products: productsData } = await fetch(
-        "https://dummyjson.com/products?limit=0"
-      ).then((res) => res.json());
-      setProducts(productsData);
-      setFilteredList(productsData);
-      setIsLoading(false);
-    };
-    fetchProducts();
+    if (products.length === 0) {
+      fetchProducts();
+    }
   }, []);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      setFilteredList(products);
+    }
+    setIsLoading(false);
+  }, [products]);
 
   useEffect(() => {
     if (filter) {

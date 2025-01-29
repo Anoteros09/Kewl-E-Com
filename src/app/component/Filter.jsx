@@ -139,7 +139,7 @@ function Filter() {
           <Button variant="contained" color="secondary" onClick={handleReset}>
             Reset
           </Button>
-          <Button variant="contained" color="primary" type="submit">
+          <Button variant="contained" color="primary2" type="submit">
             Filter
           </Button>
         </Box>
