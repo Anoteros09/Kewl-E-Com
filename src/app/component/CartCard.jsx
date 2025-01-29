@@ -15,7 +15,6 @@ function CartCard({ product }) {
     (1 - product.discountPercentage / 100)
   ).toFixed(2);
 
-  console.log(product);
   return (
     <Card className="mb-4 shadow-lg rounded-lg p-4  flex flex-row items-start space-x-4">
       <CardMedia
