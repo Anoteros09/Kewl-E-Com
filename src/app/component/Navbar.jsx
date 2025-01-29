@@ -176,7 +176,13 @@ function Navbar() {
                 onClick={() =>
                   setIsLoading(pathname != pageLinks[page] && true)
                 }
-                className="my-2 text-white flex items-center mx-5"
+                className={`py-3 flex items-center px-6 rounded-t-lg
+                  ${
+                    pathname === pageLinks[page]
+                      ? "text-secondary1 border-b-2 border-primary shadow-md"
+                      : "text-white"
+                  } 
+                  hover:border-b-2 hover:border-primary hover:shadow-lg hover:bg-neutral2`}
                 sx={{ my: 2, color: "white", display: "block", mr: 5 }}
               >
                 {page}
@@ -197,7 +203,12 @@ function Navbar() {
               <SignInButton className="bg-primary2 p-1 rounded-lg text-black font-semibold" />
             </SignedOut>
             <SignedIn>
-              <Link href="/cart">
+              <Link
+                href="/cart"
+                onClick={() =>
+                  setIsLoading(pathname != pageLinks["Cart"] && true)
+                }
+              >
                 <Badge badgeContent={total} color="primary">
                   <ShoppingCartTwoToneIcon />
                 </Badge>
