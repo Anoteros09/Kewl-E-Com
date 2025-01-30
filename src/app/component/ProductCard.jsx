@@ -1,6 +1,7 @@
+import Link from "next/link";
 import React from "react";
 
-function ProductCard({ product, handleAddToCartPopup }) {
+function ProductCard({ product, handleAddToCartPopup, setIsLoading }) {
   return (
     <div key={product.id} className="flex p-4 rounded-lg bg-neutral2">
       <div className="flex justify-center md:flex-row flex-col">
@@ -12,9 +13,13 @@ function ProductCard({ product, handleAddToCartPopup }) {
 
         <div className="flex flex-col items-start justify-between ml-4">
           <div>
-            <h2 className="text-xl font-semibold text-foreground">
+            <Link
+              href={`product/${product.id}`}
+              onClick={() => setIsLoading(true)}
+              className="text-xl font-semibold text-foreground"
+            >
               {product.title}
-            </h2>
+            </Link>
             <p className="text-sm">
               By <span className="font-bold">{product.brand}</span>
             </p>

@@ -20,6 +20,7 @@ export default {
         secondary1: "var(--secondary1)",
         primary2: "var(--primary2)",
         secondary2: "var(--secondary2)",
+        neutral: "var(--neutral)",
         neutral1: "var(--neutral1)",
         neutral2: "var(--neutral2)",
       },

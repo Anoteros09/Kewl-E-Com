@@ -78,7 +78,7 @@ const useProductStore = create(
           ...filterDefaults,
           selPriceRange: filterDefaults.priceRange,
           productsById: products.reduce((acc, product) => {
-            acc[product.id] = product;
+            acc[`${product.id}`] = product;
             return acc;
           }, {}),
         });
