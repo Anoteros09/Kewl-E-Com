@@ -99,6 +99,7 @@ function page() {
               product={product}
               key={product.id}
               handleAddToCartPopup={handleAddToCartPopup}
+              setIsLoading={setIsLoading}
             />
           );
         })}

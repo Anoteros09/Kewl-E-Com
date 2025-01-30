@@ -47,6 +47,13 @@ const theme = createTheme({
       contrastText:
         getContrastRatio(alpha("#222222", 0.7), "#fff") > 4.5 ? "#fff" : "#111",
     },
+    neutral3: {
+      main: "#333333",
+      light: alpha("#333333", 0.5),
+      dark: alpha("#333333", 0.9),
+      contrastText:
+        getContrastRatio(alpha("#333333", 0.7), "#fff") > 4.5 ? "#fff" : "#111",
+    },
     mode: "dark",
     contrastThreshold: 4.5,
     tonalOffset: 0.2,
