@@ -30,7 +30,6 @@ function page() {
   const { fetchUserCart } = useCartStore((state) => state);
 
   const handleAddToCartPopup = (product) => {
-    console.log("Triggered handleAddToCartPopup");
     setOpen(true);
     setModalProduct(product);
   };
@@ -64,7 +63,9 @@ function page() {
 
   useEffect(() => {
     if (products.length === 0) {
-      fetchProducts();
+      fetchProducts().finally(() => {
+        setIsLoading(false);
+      });
     }
   }, []);
 
@@ -72,7 +73,6 @@ function page() {
     if (products.length > 0) {
       setFilteredList(products);
     }
-    setIsLoading(false);
   }, [products]);
 
   useEffect(() => {
@@ -92,7 +92,7 @@ function page() {
   }, [filter]);
   return (
     <>
-      <div className="grid md:grid-cols-3 grid-cols-1 gap-4 p-6">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 p-6">
         {filteredList.map((product) => {
           return (
             <ProductCard

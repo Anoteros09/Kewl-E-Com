@@ -1,10 +1,11 @@
+import { Rating } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 
 function ProductCard({ product, handleAddToCartPopup, setIsLoading }) {
   return (
-    <div key={product.id} className="flex p-4 rounded-lg bg-neutral2">
-      <div className="flex justify-center md:flex-row flex-col">
+    <div key={product.id} className="flex p-4 rounded-lg bg-neutral1">
+      <div className="flex justify-center 2xl:flex-row flex-col">
         <img
           src={product.thumbnail}
           alt={product.title}
@@ -29,9 +30,15 @@ function ProductCard({ product, handleAddToCartPopup, setIsLoading }) {
                 ({product.discountPercentage}% off)
               </span>
             </p>
+            <Rating
+              name="read-only"
+              value={product.rating}
+              readOnly
+              precision={0.1}
+            />
           </div>
           <button
-            className="px-4 py-2 bg-primary1 text-white font-semibold rounded-md mt-4 hover:bg-[#005F9F] transition"
+            className="px-4 py-2 bg-primary1 text-white font-semibold rounded-md mt-2 hover:bg-[#005F9F] transition"
             onClick={() => handleAddToCartPopup(product)}
           >
             Add to Cart

@@ -11,6 +11,8 @@ import {
   FormControl,
   InputLabel,
   Box,
+  Rating,
+  Typography,
 } from "@mui/material";
 import useProductStore from "../store/products";
 import useGlobalStore from "../store/global";
@@ -63,13 +65,25 @@ function Filter() {
             max={priceRange[1]}
           />
         </FormControl>
-        <TextField
+        <FormControl>
+          <Typography id="rating-label">Rating: {rating}/5</Typography>
+          <Rating
+            label="Rating"
+            precision={0.1}
+            value={rating}
+            onChange={(event, newValue) => {
+              setRating(Number(newValue));
+            }}
+          />
+        </FormControl>
+
+        {/* <TextField
           label="Rating"
           type="number"
           inputProps={{ min: 0, max: 5, step: 0.01 }}
           value={rating}
           onChange={(e) => setRating(Number(e.target.value))}
-        />
+        /> */}
         <FormControl>
           <InputLabel id="brand-select-label">Brands</InputLabel>
           <Select

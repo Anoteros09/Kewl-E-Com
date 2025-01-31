@@ -10,7 +10,7 @@ import {
   getContrastRatio,
 } from "@mui/material";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+import { dark, simple } from "@clerk/themes";
 const theme = createTheme({
   palette: {
     primary: {
@@ -88,7 +88,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: dark,
+        baseTheme: simple,
       }}
     >
       <html lang="en">
@@ -100,6 +100,10 @@ export default function RootLayout({ children }) {
             href="./favicon.ico"
             sizes="any"
           />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          ></meta>
         </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen relative`}

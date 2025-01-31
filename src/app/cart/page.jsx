@@ -33,6 +33,7 @@ function page() {
             <CartCard
               product={{ ...item, ...productsById[item.product_id] }}
               key={item.product_id}
+              setIsLoading={setIsLoading}
             />
           ))}
       </Box>

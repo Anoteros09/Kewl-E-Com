@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, Rating } from "@mui/material";
+import { Rating } from "@mui/material";
 import useProductStore from "../../store/products";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import { encryptData } from "../../utils/encryptData";
 import AddToCart from "../../component/AddToCart";
 import { useUser } from "@clerk/nextjs";
 import useCartStore from "../../store/cart";
+import AvatarIcon from "../../component/AvatarIcon";
 
 function page() {
   const { id: productId } = useParams();
@@ -24,7 +25,6 @@ function page() {
   const [modalProduct, setModalProduct] = useState({});
 
   const handleAddToCartPopup = (product) => {
-    console.log("Triggered handleAddToCartPopup");
     setOpen(true);
     setModalProduct(product);
   };
@@ -71,17 +71,15 @@ function page() {
       setIsLoading(false);
     }
   }, [productsById]);
-  console.log(product);
   return (
     product && (
-      <div className="max-w-5xl mx-auto mt-8 p-6 bg-neutral1 text-white rounded-xl shadow-lg">
+      <div className="max-w-5xl mx-auto md:mt-8 p-6 bg-neutral1 text-foreground rounded-xl shadow-lg">
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Image Section */}
           <div>
             <img
               src={selectedImage}
               alt={product.title}
-              className={`w-full h-96 object-contain rounded-lg shadow-lg bg-neutral transition-opacity duration-300 ease-in-out ${
+              className={`w-full h-96 object-contain rounded-lg shadow-lg bg-white dark:bg-neutral  transition-opacity duration-300 ease-in-out ${
                 isFading ? "opacity-0" : "opacity-100"
               }`}
             />
@@ -113,7 +111,6 @@ function page() {
               </span>
             </div>
             <div className="flex items-center mt-2">
-              {/* implement rating */}
               <Rating
                 name="read-only"
                 value={product.rating}
@@ -144,7 +141,7 @@ function page() {
               Return Policy: {product.returnPolicy}
             </p>
             <button
-              className="mt-4 px-6 py-3 bg-primary1 text-white rounded-lg shadow hover:bg-primary2 transition"
+              className="mt-4 px-6 py-3 bg-primary1 text-foreground rounded-lg shadow hover:bg-primary2 transition"
               onClick={() => handleAddToCartPopup(product)}
             >
               Add to Cart
@@ -161,13 +158,19 @@ function page() {
                 key={index}
                 className="p-4 border rounded-lg shadow-sm border-foreground"
               >
+                <Rating
+                  name="read-only"
+                  value={review.rating}
+                  readOnly
+                  precision={0.1}
+                />
                 <div className="flex items-center mb-2">
-                  {/* implement rating */}
-                  <span className="ml-2 flex items-center gap-4 text-primary2">
-                    <Avatar>
+                  <span className=" flex items-center gap-4 text-primary2">
+                    {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>
                       {review.reviewerName.split(" ")[0][0] +
                         review.reviewerName.split(" ")[1][0]}
-                    </Avatar>
+                    </Avatar> */}
+                    <AvatarIcon name={review.reviewerName} />
                     {review.reviewerName}
                   </span>
                 </div>
