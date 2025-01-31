@@ -11,10 +11,12 @@ import {
 import React, { useEffect, useState } from "react";
 import QuantityInput from "./NumberInput";
 import useGlobalStore from "../store/global";
+import { useUser } from "@clerk/nextjs";
 
 function AddToCart({ modalProduct, open, setOpen, handleAddToCart }) {
   const [quantity, setQuantity] = useState(1);
   const { setIsLoading } = useGlobalStore((state) => state);
+  const { isSignedIn } = useUser();
   const handleClose = () => setOpen(false);
   useEffect(() => {
     setQuantity(1);
@@ -47,9 +49,15 @@ function AddToCart({ modalProduct, open, setOpen, handleAddToCart }) {
         <Button onClick={handleClose}>Cancel</Button>
         <Button
           onClick={() => {
-            handleAddToCart(modalProduct, quantity);
-            setOpen(false);
-            setIsLoading(true);
+            if (!isSignedIn) {
+              alert("Cannot add to cart, please sign in before proceeding.");
+              setOpen(false);
+              return;
+            } else {
+              handleAddToCart(modalProduct, quantity);
+              setOpen(false);
+              setIsLoading(true);
+            }
           }}
           autoFocus
         >

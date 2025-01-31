@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
     );
 
     if (existingData.length == 1) {
-      console.log("Updating existing product");
       const { quantity: existingQuantity } = existingData[0];
       const newQuantity = existingQuantity + quantity;
       const newNetPrice = newQuantity * unitPrice;
@@ -24,7 +23,6 @@ export async function POST(req: NextRequest) {
         message: `Product added to cart successfully`,
       });
     } else {
-      console.log("Adding new product");
       const resp = await sql(
         `INSERT INTO user_cart (user_id, product_id, quantity, net_price, unit_price) VALUES ('${userId}', ${productId}, ${quantity}, ${netPrice}, ${unitPrice})`
       );
