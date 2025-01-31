@@ -63,9 +63,7 @@ function page() {
 
   useEffect(() => {
     if (products.length === 0) {
-      fetchProducts().finally(() => {
-        setIsLoading(false);
-      });
+      fetchProducts();
     }
   }, []);
 

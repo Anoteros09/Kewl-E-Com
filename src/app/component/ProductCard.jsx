@@ -34,7 +34,7 @@ function ProductCard({ product, handleAddToCartPopup, setIsLoading }) {
               name="read-only"
               value={product.rating}
               readOnly
-              precision={0.1}
+              precision={0.5}
             />
           </div>
           <button
