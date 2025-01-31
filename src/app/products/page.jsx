@@ -72,6 +72,7 @@ function page() {
   useEffect(() => {
     if (products.length > 0) {
       setFilteredList(products);
+      setIsLoading(false);
     }
   }, [products]);
 
