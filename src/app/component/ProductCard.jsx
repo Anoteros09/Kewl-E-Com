@@ -1,10 +1,34 @@
 import { Rating } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
-function ProductCard({ product, handleAddToCartPopup, setIsLoading }) {
+function ProductCard({
+  product,
+  handleAddToCartPopup,
+  setIsLoading,
+  isLast,
+  newLimit,
+}) {
+  const cardRef = useRef();
+  useEffect(() => {
+    if (!cardRef?.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (isLast && entry.isIntersecting) {
+        newLimit();
+        observer.unobserve(entry.target);
+      }
+    });
+
+    observer.observe(cardRef.current);
+  }, [isLast]);
+
   return (
-    <div key={product.id} className="flex p-4 rounded-lg bg-neutral1">
+    <div
+      key={product.id}
+      className="flex p-4 rounded-lg bg-neutral1"
+      ref={cardRef}
+    >
       <div className="flex justify-center 2xl:flex-row flex-col">
         <img
           src={product.thumbnail}
@@ -34,7 +58,7 @@ function ProductCard({ product, handleAddToCartPopup, setIsLoading }) {
               name="read-only"
               value={product.rating}
               readOnly
-              precision={0.5}
+              precision={0.1}
             />
           </div>
           <button

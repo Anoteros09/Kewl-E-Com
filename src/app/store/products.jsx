@@ -26,6 +26,7 @@ const useProductStore = create(
           brands: [],
           categories: [],
         };
+        console.log(products);
         products.forEach((product) => {
           filterDefaults.brands.includes(product.brand) ||
           typeof product.brand != "string"
@@ -48,10 +49,7 @@ const useProductStore = create(
           selPriceRange: filterDefaults.priceRange,
         });
       },
-      fetchProducts: async () => {
-        const { products } = await fetch(
-          "https://dummyjson.com/products?limit=0"
-        ).then((res) => res.json());
+      setPostProcessData: (products) => {
         let filterDefaults = {
           priceRange: [0, 1],
           brands: [],
@@ -74,7 +72,6 @@ const useProductStore = create(
             : null;
         });
         set({
-          products,
           ...filterDefaults,
           selPriceRange: filterDefaults.priceRange,
           productsById: products.reduce((acc, product) => {
@@ -82,6 +79,15 @@ const useProductStore = create(
             return acc;
           }, {}),
         });
+      },
+      fetchProducts: async (products, limit, page) => {
+        await fetch(
+          `https://dummyjson.com/products/?limit=${limit}&skip=${page}`
+        )
+          .then((res) => res.json())
+          .then(({ products: newProducts }) =>
+            set({ products: [...products, ...newProducts] })
+          );
       },
       setSelPriceRange: (selPriceRange) => set({ selPriceRange }),
       setRating: (rating) => set({ rating }),

@@ -17,15 +17,17 @@ function page() {
     selBrands,
     selCategories,
     rating,
-    fetchProducts,
+    setPostProcessData,
     products,
     filter,
     setFilter,
+    fetchProducts,
   } = useProductStore((state) => state);
   const { setIsLoading } = useGlobalStore((state) => state);
   const [filteredList, setFilteredList] = useState([]);
   const [open, setOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState({});
+  const [page, setPage] = useState(0);
   const { user } = useUser();
   const { fetchUserCart } = useCartStore((state) => state);
 
@@ -62,13 +64,13 @@ function page() {
   };
 
   useEffect(() => {
-    if (products.length === 0) {
-      fetchProducts();
-    }
-  }, []);
+    let limit = 20;
+    fetchProducts(products, limit, page);
+  }, [page]);
 
   useEffect(() => {
     if (products.length > 0) {
+      setPostProcessData(products);
       setFilteredList(products);
       setIsLoading(false);
     }
@@ -92,13 +94,15 @@ function page() {
   return (
     <>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 p-6">
-        {filteredList.map((product) => {
+        {filteredList.map((product, index) => {
           return (
             <ProductCard
               product={product}
               key={product.id}
               handleAddToCartPopup={handleAddToCartPopup}
               setIsLoading={setIsLoading}
+              isLast={index === products.length - 1}
+              newLimit={() => setPage(page + 20)}
             />
           );
         })}
